@@ -1,0 +1,156 @@
+
+
+
+
+class Employee(models.Model):
+    name=models.CharField(max_length=100)
+
+    age=models.PositiveIntegerField()
+
+    gender=models.CharField(max_length=100)
+
+    department=models.CharField(max_length=200)
+
+    mobile=models.CharField(max_length=12)
+
+    salary=models.PositiveIntegerField()
+
+    address=models.TextField()
+
+    qualification=models.CharField(max_length=200,null=True)
+
+
+
+from crm.models import employee
+
+
+*form query for creating a  resource
+
+modelname.objects.create(field:"value")
+Employee.objects.create(name="arya",age="23",gender="female",department="cs",mobile="33444",salary="65000",address="dhdchh",qualification="bca")
+
+*orm query for fetching all records
+    qs=modelname.objects.all()
+    qs=Employee.objects.all()
+*shell python manage.py shell
+
+*orm query for fetching a specific record
+    qs=Employee.objects.get(id=1)
+
+*orm query to filter
+   qs=modelname.objects.filter(field=value)
+
+   #fetch male employees
+   qs=Employee.objects.filter(gender="male")
+
+
+   *field lookups
+    #< __lt
+    #> __gt
+    #<= __lte
+    #>= __gte  
+    #startswith
+    #ends_with
+    #contains
+   
+    # orm query for !=
+    qs=Employee.objects.all().exclude(department="cs") 
+                             -------
+
+
+*orm query for updating
+
+    modelname.objects.filter(field=value).update(field=value,field=valueid)
+    Employee.objects.filter(id=3).update(age=26,salary=60000)
+
+
+*orm query for deleting a record
+    modelname.objects.get(field=value).dellete()
+
+*min salary
+    >>> qs=Employee.objects.all().values("salary").aggregate(Min("salary")) 
+
+
+
+
+    Django Database Table Creation Question
+
+You are tasked with creating a movie database in Django. The movie model should have the following fields:
+
+- id (Integer Field, Primary Key)
+- title (String Field)
+- genre (String Field)
+- runtime (Integer Field representing the duration in minutes)
+- language (String Field)
+- year (Integer Field representing the release year)
+- director (String Field)
+
+Instructions:
+
+1. Write the steps required to create the Django model for the Movie table with the specified fields.
+
+
+class Movie(models.Model):
+
+title=models.CharField(max_length=100)
+genre=models.CharField(max_length=200)
+runtime=models.PositiveIntegerField()
+language=models.CharField(max_length==200)
+year=models.PositiveIntegerField()
+director=models.CharField()
+
+def __str__(self):
+    return self.title
+
+
+##orm query for creating new movie
+
+    Movie.objects.create(title="boyganvilla",genre="thriller",runtime=128,language="malayalam",year=2024,director="amalneerad")
+
+## query for fetching all movies
+
+    qs=Movie.objects.all()
+    qs
+
+##query for fetching malayalam movies
+
+    qs=Movie.objects.filter(language="malayalam")
+
+## malayalam movies with runtime__gt140
+    
+    qs=Movie.objects.filter(language="malayalam",runtime__gt=140)
+
+##sort by year
+    qs=movie.objects.all().order_by()
+
+##employee name startswith a
+    >>> qs=Employee.objects.filter(name__startswith="a")
+
+#employee name contains ee    
+
+    >>> qs=Employee.objects.filter(name__contains="nn") 
+
+##employee with highest_salary
+
+
+    from Django.db.models import Max
+
+    qs=Employee.objects.all().values("salary).aggregate(Max("salary"))
+
+
+##fetch movie genres only
+ qs=Movie.objects.all().values("genre").distinct()
+
+
+
+
+
+2. How will you apply the changes to the database after creating the model?
+
+
+
+
+
+
+3. Write the code for the Django model.
+4. Mention how you would query all movies directed by a specific director.

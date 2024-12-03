@@ -1,0 +1,30 @@
+class Mobile(models.Model):
+
+    name=models.CharField(max_length=100)
+
+    brand=models.CharField(max_length=200)
+
+    price=models.PositiveIntegerField()
+
+    storage=models.CharField(max_length=100)
+
+    color=models.CharField(max_length=100)
+
+
+#create 
+modelname.objects.create(field:"value")
+
+Mobile.objects.create(name="vivoy31",
+                    brand="vivo",
+                    price="27000",
+                    RAM="8gb",
+                    color="white"
+                    )
+
+#query for fetching all records
+
+
+
+*orm query for fetching a specific record
+
+
